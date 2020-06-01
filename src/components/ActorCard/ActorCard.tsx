@@ -3,27 +3,38 @@ import { Button, Card, CardActions, CardContent, Typography } from '@material-ui
 import { makeStyles } from '@material-ui/core/styles';
 
 type Props = {
-  name: string;
+  firstName: string;
+  lastName: string;
   banner: string;
   description: string;
+  src: string;
 };
 
 const useClasses = makeStyles({
   root: {
-    width: 314
+    width: 314,
+    padding: 0
+  },
+  rootContent: {
+    padding: 0
+  },
+  image: {
+    width: '100%',
+    height: 300,
+    objectFit: 'cover'
   }
 });
 
-const ActorCard: FC<Props> = ({ name, description, banner }) => {
-  const { root } = useClasses();
+const ActorCard: FC<Props> = ({ firstName, lastName, description, src }) => {
+  const { root, image, rootContent } = useClasses();
   return (
     <Card className={root}>
-      <CardContent>
+      <CardContent className={rootContent}>
         <div>
-          <img src={banner} alt="actor-banner-preview"/>
+          <img className={image} src={src} alt="actor-banner-preview"/>
         </div>
-        <Typography variant="h3">
-          {name}
+        <Typography variant="h5">
+          {`${lastName} ${firstName}`}
         </Typography>
         {description}
       </CardContent>

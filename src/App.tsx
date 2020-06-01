@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import ActorCard from './components/ActorCard';
+import Overview from './components/Overview';
+
+// import ActorPage from './components/ActorPage/ActorPage';
 
 function App() {
   return (
     <div className="App">
-      <ActorCard name="Name" description="lorem ipsum" banner="http://"/>
+      <Overview/>
     </div>
   );
 }
