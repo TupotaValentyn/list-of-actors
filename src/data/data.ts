@@ -1,5 +1,6 @@
 export const actors = [
   {
+    'id': 1,
     'firstName': 'Кирило ',
     'lastName': 'Анісімов',
     'src': 'https://picsum.photos/id/237/200/300',
@@ -30,5 +31,4 @@ export const actors = [
     'hasPiercing': false,
     'skills': 'Водіння авто'
   }
-
 ]

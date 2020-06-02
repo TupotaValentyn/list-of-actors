@@ -23,11 +23,6 @@ const Overview: FC<Props> = () => {
 
   return (
     <>
-      <AppBar position="sticky">
-        <Toolbar>
-          Actors
-        </Toolbar>
-      </AppBar>
       <div className={root}>
         {
           actors.map((actor: any) => {
