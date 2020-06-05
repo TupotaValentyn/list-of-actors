@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import * as Yup from 'yup';
 import { actors } from '../../data/data';
+import { actorsDataSuccess } from '../../slices/actors';
+import { useDispatch } from 'react-redux';
 
 
 type Props = {};
@@ -35,6 +37,8 @@ const Filters: FC<Props> = () => {
     return `${value}`;
   }
 
+  const dispatch = useDispatch()
+
   const valueBetween = (values: any, value: any) => {
     return value >= values[0] && value <= values[1];
   }
@@ -54,6 +58,8 @@ const Filters: FC<Props> = () => {
         valueBetween(val.height, height) && valueBetween(val.weight, weight) && valueBetween(val.chest, chest) &&
         valueBetween(val.waist, waist) && valueBetween(val.hips, hips) && val.country === country
     })
+
+    dispatch(actorsDataSuccess(matchActors));
 
     console.log(matchActors);
   }

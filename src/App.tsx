@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -10,10 +10,18 @@ import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Filters from './components/Filters';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useDispatch } from 'react-redux';
+import { actors } from './data/data';
+import { actorsDataSuccess } from './slices/actors';
 
 function App() {
 
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    // dispatch(actorsDataSuccess())
+  }, [])
 
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,

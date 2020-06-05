@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { AppBar, Toolbar } from '@material-ui/core';
-import { actors } from '../../data/data';
 import ActorCard from '../ActorCard';
 import { makeStyles } from '@material-ui/core/styles';
-import Filters from './../Filters';
+import { useSelector } from 'react-redux';
+import { RootStore } from '../../reducers';
 
 type Props = {};
 
@@ -17,12 +16,15 @@ const useClasses = makeStyles({
 const Overview: FC<Props> = () => {
 
   const { root } = useClasses();
+  const actors = useSelector((store: RootStore) => store.actorsData);
+
+  console.log(actors);
 
   return (
     <>
       <div className={root}>
         {
-          actors.map((actor: any) => {
+          actors.payload?.map((actor: any) => {
             return <ActorCard {...actor}/>
           })
         }
