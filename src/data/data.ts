@@ -3,7 +3,7 @@ export const actors = [
     'id': 1,
     'firstName': 'Кирило ',
     'lastName': 'Анісімов',
-    'src': 'https://picsum.photos/id/237/200/300',
+    'src': '/actors/actor.jpg',
     'age': 20,
     'sex': 'Чоловік',
     'country': 'Україна',

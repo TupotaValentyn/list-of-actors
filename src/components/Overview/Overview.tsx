@@ -3,6 +3,7 @@ import ActorCard from '../ActorCard';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import { RootStore } from '../../reducers';
+import { Typography } from '@material-ui/core';
 
 type Props = {};
 
@@ -24,9 +25,9 @@ const Overview: FC<Props> = () => {
     <>
       <div className={root}>
         {
-          actors.payload?.map((actor: any) => {
+          actors.payload?.length ? actors.payload?.map((actor: any) => {
             return <ActorCard {...actor}/>
-          })
+          }) : <Typography>No data</Typography>
         }
       </div>
     </>
