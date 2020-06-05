@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -6,15 +6,47 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { routes } from './components/configs/routes';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import Drawer from '@material-ui/core/Drawer';
+import Filters from './components/Filters';
+import MenuIcon from '@material-ui/icons/Menu';
 
 function App() {
+
+  const [open, setOpen] = useState(false);
+
+  const toggleDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent,
+  ) => {
+    if (
+      event.type === 'keydown' &&
+      ((event as React.KeyboardEvent).key === 'Tab' ||
+        (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    setOpen(open);
+  };
+
   return (
     <div className="App">
       <AppBar position="sticky">
         <Toolbar>
-          Actors
+          <Typography>
+            Actors
+          </Typography>
+          <IconButton edge="start" color="inherit" aria-label="menu"
+                      onClick={toggleDrawer(true)}
+                      onKeyDown={toggleDrawer(true)}>
+            <MenuIcon/>
+          </IconButton>
         </Toolbar>
+        <Drawer open={open} anchor="left" onClose={toggleDrawer(false)}>
+          <div style={{ width: 348 }}>
+            <Filters/>
+          </div>
+        </Drawer>
       </AppBar>
       <BrowserRouter>
         <Switch>

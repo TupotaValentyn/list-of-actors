@@ -18,10 +18,6 @@ const Overview: FC<Props> = () => {
 
   const { root } = useClasses();
 
-  // const data = JSON.parse(actors);
-
-  console.log(actors);
-
   return (
     <>
       <div className={root}>
@@ -30,7 +26,6 @@ const Overview: FC<Props> = () => {
             return <ActorCard {...actor}/>
           })
         }
-        <Filters/>
       </div>
     </>
   )

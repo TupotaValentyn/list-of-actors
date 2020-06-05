@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 
 type Props = {
   firstName: string;
@@ -8,6 +9,7 @@ type Props = {
   banner: string;
   description: string;
   src: string;
+  id: number;
 };
 
 const useClasses = makeStyles({
@@ -25,7 +27,7 @@ const useClasses = makeStyles({
   }
 });
 
-const ActorCard: FC<Props> = ({ firstName, lastName, description, src }) => {
+const ActorCard: FC<Props> = ({ firstName, lastName, description, src, id }) => {
   const { root, image, rootContent } = useClasses();
   return (
     <Card className={root}>
@@ -39,7 +41,7 @@ const ActorCard: FC<Props> = ({ firstName, lastName, description, src }) => {
         {description}
       </CardContent>
       <CardActions>
-        <Button variant="text">View</Button>
+        <NavLink to={`/actor/${id}`}>View</NavLink>
       </CardActions>
     </Card>
   );
