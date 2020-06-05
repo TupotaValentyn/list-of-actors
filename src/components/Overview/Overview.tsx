@@ -3,6 +3,7 @@ import { AppBar, Toolbar } from '@material-ui/core';
 import { actors } from '../../data/data';
 import ActorCard from '../ActorCard';
 import { makeStyles } from '@material-ui/core/styles';
+import Filters from './../Filters';
 
 type Props = {};
 
@@ -29,6 +30,7 @@ const Overview: FC<Props> = () => {
             return <ActorCard {...actor}/>
           })
         }
+        <Filters/>
       </div>
     </>
   )
