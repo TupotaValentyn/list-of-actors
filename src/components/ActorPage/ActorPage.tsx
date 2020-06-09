@@ -14,7 +14,7 @@ const useClasses = makeStyles({
     padding: 32
   },
   imageBox: {
-    width: 300,
+    flexGrow: 1,
     '& img': {
       width: '100%',
       objectFit: 'contain'
@@ -55,14 +55,14 @@ const ActorPage: FC<Props> = () => {
 
   const {
     id: userId, src, lastName, firstName, age, country, city, bodyConstitution, chest, chin, ears, eyeColor, eyeShape, faceShape, forehead,
-    hairColor, hairLength, hasBeard, hasMustache, hasPiercing, hasTattoo, height, hips, lips, noseType, readyToRelocate, sex,
+    hairColor, hairLength, hasBeard, hasMustache, hasPiercing, hasTattoo, height, hips, lips, noseType, readyToRelocate, sex, videoLink,
     skills, waist, weight
   }: Actor = actor;
 
 
   return <div>
-    <div style={{width: 'fit-content', margin: '32px'}}>
-      <Button component={Link} to="/" variant="contained" color="primary" >
+    <div style={{ width: 'fit-content', margin: '32px' }}>
+      <Button component={Link} to="/" variant="contained" color="primary">
         Назад
       </Button>
     </div>
@@ -73,17 +73,22 @@ const ActorPage: FC<Props> = () => {
         <Typography variant="h5" color="primary">
           {`${lastName} ${firstName}`}
         </Typography>
+        <div style={{width: '100%'}}>
+          <iframe style={{width: '100%'}} height="315" src={videoLink} frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen></iframe>
+        </div>
       </div>
       <div className={contentBox}>
         <div>
           <Typography variant="h3" color="primary">
-            Actor info
+            Інформація про актора
           </Typography>
           <div style={{ padding: '0 32px', width: 600 }}>
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Age
+                  Вік
                 </Typography>
               </InputLabel>
               <TextField
@@ -99,7 +104,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Country
+                  Країна
                 </Typography>
               </InputLabel>
               <TextField
@@ -115,7 +120,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  city
+                  Місто
                 </Typography>
               </InputLabel>
               <TextField
@@ -131,7 +136,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Body Constitution
+                  Статура
                 </Typography>
               </InputLabel>
               <TextField
@@ -147,7 +152,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Chest
+                  Груди
                 </Typography>
               </InputLabel>
               <TextField
@@ -163,7 +168,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Chin
+                  Підборіддя
                 </Typography>
               </InputLabel>
               <TextField
@@ -179,7 +184,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Ears
+                  Вуха
                 </Typography>
               </InputLabel>
               <TextField
@@ -195,7 +200,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Eye Color
+                  Колір очей
                 </Typography>
               </InputLabel>
               <TextField
@@ -211,7 +216,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Eye Shape
+                  Форма очей
                 </Typography>
               </InputLabel>
               <TextField
@@ -227,7 +232,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Face Shape
+                  Форма лиця
                 </Typography>
               </InputLabel>
               <TextField
@@ -243,7 +248,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Forehead
+                  Лоб
                 </Typography>
               </InputLabel>
               <TextField
@@ -259,7 +264,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Hair Color
+                  Колір фолосся
                 </Typography>
               </InputLabel>
               <TextField
@@ -275,7 +280,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Hair Length
+                  Довжина волосся
                 </Typography>
               </InputLabel>
               <TextField
@@ -291,7 +296,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Has Beard
+                  Наявність бороди
                 </Typography>
               </InputLabel>
               <TextField
@@ -307,7 +312,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Has Mustache
+                  Наявність вус
                 </Typography>
               </InputLabel>
               <TextField
@@ -323,7 +328,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Has Piercing
+                  Наявність пірсингу
                 </Typography>
               </InputLabel>
               <TextField
@@ -339,7 +344,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Has Tattoo
+                  Наявність тату
                 </Typography>
               </InputLabel>
               <TextField
@@ -355,7 +360,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Height
+                  Висота
                 </Typography>
               </InputLabel>
               <TextField
@@ -371,7 +376,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Hips
+                  Стегна
                 </Typography>
               </InputLabel>
               <TextField
@@ -387,7 +392,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Lips
+                  Губи
                 </Typography>
               </InputLabel>
               <TextField
@@ -403,7 +408,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Nose Type
+                  Форма носу
                 </Typography>
               </InputLabel>
               <TextField
@@ -419,7 +424,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Ready to Relocate
+                  Готовність переїхати
                 </Typography>
               </InputLabel>
               <TextField
@@ -435,7 +440,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Sex
+                  Стать
                 </Typography>
               </InputLabel>
               <TextField
@@ -451,7 +456,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Skills
+                  Уміння
                 </Typography>
               </InputLabel>
               <TextField
@@ -467,7 +472,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Waist
+                  Талія
                 </Typography>
               </InputLabel>
               <TextField
@@ -483,7 +488,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Weight
+                  Вага
                 </Typography>
               </InputLabel>
               <TextField

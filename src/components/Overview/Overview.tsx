@@ -10,7 +10,10 @@ type Props = {};
 const useClasses = makeStyles({
   root: {
     height: '100%',
-    padding: 32
+    padding: 32,
+    display: 'grid',
+    grid: 'repeat(auto-fill, 381px)/ repeat(auto-fill, 314px)',
+    gridGap: 16
   }
 });
 
