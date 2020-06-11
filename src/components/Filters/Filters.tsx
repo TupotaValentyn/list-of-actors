@@ -19,17 +19,30 @@ import { useDispatch } from 'react-redux';
 type Props = {};
 
 const initialValues = {
-  age: [18, 100],
+  age: [3, 100],
   sex: 'Чоловік',
   city: 'Київ',
   readyToRelocate: false,
   bodyConstitution: 'Ектоморф',
   height: [60, 200],
-  weight: [40, 150],
-  chest: [70, 150],
-  waist: [50, 140],
-  hips: [70, 150],
-  country: 'Україна'
+  weight: [30, 150],
+  chest: [40, 150],
+  waist: [40, 140],
+  hips: [40, 150],
+  country: 'Україна',
+  hairColor: 'Русявий',
+  hairLength: 'Коротке',
+  faceShape: 'Овальне',
+  forehead: 'Високий і широкий',
+  eyeShape: 'Нависла повіка',
+  eyeColor: 'Світло-карий',
+  noseType: 'Довгий ніс',
+  ears: 'Круглі',
+  lips: 'Сердечком',
+  chin: 'Овальне',
+  hasMustache: false,
+  hasBeard: false,
+  skills: 'Вокал'
 };
 
 const Filters: FC<Props> = () => {
@@ -41,6 +54,21 @@ const Filters: FC<Props> = () => {
 
   const valueBetween = (values: any, value: any) => {
     return value >= values[0] && value <= values[1];
+  }
+
+  const convertBoolValue = (actorVal: boolean, defaultVal: string) => {
+    if (defaultVal === 'Так') {
+      const value = true;
+      return value === actorVal;
+    }
+
+    const value = false;
+
+    return value === actorVal;
+  };
+
+  const findMatches = (actorSkills: string[], skill: string) => {
+    return actorSkills.find((actorSkill) => actorSkill === skill);
   }
 
   const onSubmit = (val: any) => {
@@ -55,13 +83,18 @@ const Filters: FC<Props> = () => {
 
       return valueBetween(val.age, age) && val.sex === sex && val.city === city &&
         val.readyToRelocate === readyToRelocate && val.bodyConstitution === bodyConstitution &&
-        valueBetween(val.height, height) && valueBetween(val.weight, weight) && valueBetween(val.chest, chest) &&
-        valueBetween(val.waist, waist) && valueBetween(val.hips, hips) && val.country === country
+        valueBetween(val.height, height) && valueBetween(val.weight, weight) &&
+        valueBetween(val.chest, chest) &&
+        valueBetween(val.waist, waist) && valueBetween(val.hips, hips) &&
+        val.country === country && hairLength === val.hairLength && hairColor === val.hairColor &&
+        faceShape === val.faceShape && forehead === val.forehead && eyeShape === val.eyeShape &&
+        eyeColor === val.eyeColor && noseType === val.noseType && ears === val.ears &&
+        lips === val.lips && chin === val.chin && convertBoolValue(val.hasMustache, hasMustache) &&
+        convertBoolValue(val.hasBeard, hasBeard) && findMatches(skills, val.skills)
     })
 
     dispatch(actorsDataSuccess(matchActors));
 
-    console.log(matchActors);
   }
 
   const { values, handleChange, handleBlur, handleSubmit, setFieldValue } = useFormik({
@@ -86,9 +119,9 @@ const Filters: FC<Props> = () => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={18}
+        min={3}
         max={100}
-        marks={[{ value: 18, label: 18 }, { value: 100, label: 100 }]}
+        marks={[{ value: 3, label: 3 }, { value: 100, label: 100 }]}
       />
     </FormControl>
     <FormControl>
@@ -112,7 +145,7 @@ const Filters: FC<Props> = () => {
     </FormControl>
     <FormControl>
       <InputLabel id="country-select">
-        Місто
+        Країна
       </InputLabel>
       <Select labelId="country-select" name="country" value={values.country} onChange={handleChange}>
         <MenuItem value="Україна">Україна</MenuItem>
@@ -163,9 +196,9 @@ const Filters: FC<Props> = () => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={40}
+        min={30}
         max={150}
-        marks={[{ value: 40, label: 40 }, { value: 150, label: 150 }]}
+        marks={[{ value: 30, label: 30 }, { value: 150, label: 150 }]}
       />
     </FormControl>
 
@@ -181,9 +214,9 @@ const Filters: FC<Props> = () => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={70}
+        min={40}
         max={150}
-        marks={[{ value: 70, label: 70 }, { value: 150, label: 150 }]}
+        marks={[{ value: 40, label: 40 }, { value: 150, label: 150 }]}
       />
     </FormControl>
 
@@ -199,9 +232,9 @@ const Filters: FC<Props> = () => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={50}
+        min={40}
         max={140}
-        marks={[{ value: 50, label: 50 }, { value: 140, label: 140 }]}
+        marks={[{ value: 40, label: 40 }, { value: 140, label: 140 }]}
       />
     </FormControl>
 
@@ -217,10 +250,149 @@ const Filters: FC<Props> = () => {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
-        min={70}
+        min={40}
         max={150}
-        marks={[{ value: 70, label: 70 }, { value: 150, label: 150 }]}
+        marks={[{ value: 40, label: 40 }, { value: 150, label: 150 }]}
       />
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="hairColor-select">Колір волосся</InputLabel>
+      <Select labelId="sex-select" name="hairColor" value={values.hairColor} onChange={handleChange}>
+        <MenuItem value="Русявий">Русявий</MenuItem>
+        <MenuItem value="Блонд">Блонд</MenuItem>
+        <MenuItem value="Чорний">Чорний</MenuItem>
+        <MenuItem value="Рудий">Рудий</MenuItem>
+        <MenuItem value="Каштановий">Каштановий</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="hairLength-select">Довжина волосся</InputLabel>
+      <Select labelId="hairLength-select" name="hairColor" value={values.hairLength} onChange={handleChange}>
+        <MenuItem value="Коротке">Коротке</MenuItem>
+        <MenuItem value="Середня довжина">Середня довжина</MenuItem>
+        <MenuItem value="Чорний">Довге</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="faceShape-select">Форма обличчя</InputLabel>
+      <Select labelId="faceShape-select" name="faceShape" value={values.faceShape} onChange={handleChange}>
+        <MenuItem value="Овальне">Овальне</MenuItem>
+        <MenuItem value="Видовжене">Видовжене</MenuItem>
+        <MenuItem value="Кругле">Кругле</MenuItem>
+        <MenuItem value="Квадратне">Квадратне</MenuItem>
+        <MenuItem value="Трикутне">Трикутне</MenuItem>
+        <MenuItem value="Грушевидне">Грушевидне</MenuItem>
+        <MenuItem value="Неповторне">Неповторне</MenuItem>
+      </Select>
+    </FormControl>
+
+
+    <FormControl>
+      <InputLabel id="forehead-select">Лоб</InputLabel>
+      <Select labelId="forehead-select" name="forehead" value={values.forehead} onChange={handleChange}>
+        <MenuItem value="Високий і широкий">Високий і широкий</MenuItem>
+        <MenuItem value="Широкий і низький">Широкий і низький</MenuItem>
+        <MenuItem value="Високий і вузький"> Високий і вузький</MenuItem>
+        <MenuItem value="Прямий">Прямий</MenuItem>
+        <MenuItem value="З нахилом">З нахилом</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="eyeShape-select">Форма очей</InputLabel>
+      <Select labelId="eyeShape-select" name="eyeShape" value={values.eyeShape} onChange={handleChange}>
+        <MenuItem value="Нависла повіка">Нависла повіка</MenuItem>
+        <MenuItem value="Мигдалеподібні">Мигдалеподібні</MenuItem>
+        <MenuItem value="Близько посаджені очі">Близько посаджені очі</MenuItem>
+        <MenuItem value="З опущеними кутиками">З опущеними кутиками</MenuItem>
+        <MenuItem value="Розкосі">Розкосі</MenuItem>
+        <MenuItem value="Одне око">Одне око</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="eyeColor-select">Колір очей</InputLabel>
+      <Select labelId="eyeColor-select" name="eyeColor" value={values.eyeColor} onChange={handleChange}>
+        <MenuItem value="Блакитний">Блакитний</MenuItem>
+        <MenuItem value="Сірий">Сірий</MenuItem>
+        <MenuItem value="Сіро-блакитний">Сіро-блакитний</MenuItem>
+        <MenuItem value="Зелений">Зелений</MenuItem>
+        <MenuItem value="Сіро-зелений">Сіро-зелений</MenuItem>
+        <MenuItem value="Темно-карий">Темно-карий</MenuItem>
+        <MenuItem value="Світло-карий">Світло-карий</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="noseType-select">Форма носу</InputLabel>
+      <Select labelId="noseType-select" name="noseType" value={values.noseType} onChange={handleChange}>
+        <MenuItem value="Довгий ніс">Довгий ніс</MenuItem>
+        <MenuItem value="Ніс картоплею">Ніс картоплею</MenuItem>
+        <MenuItem value="Ніс з горбинкою">Ніс з горбинкою</MenuItem>
+        <MenuItem value="Ніс з горбинкою">Ніс з горбинкою</MenuItem>
+        <MenuItem value="Орлиний ніс">Орлиний ніс</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="ears-select">Вуха</InputLabel>
+      <Select labelId="ears-select" name="ears" value={values.ears} onChange={handleChange}>
+        <MenuItem value="Круглі">Вуглуваті</MenuItem>
+        <MenuItem value="Вуглуваті">Вуглуваті</MenuItem>
+        <MenuItem value="Загострені">Загострені</MenuItem>
+        <MenuItem value="Стирчачі">Стирчачі</MenuItem>
+        <MenuItem value="Широка мочка">Широка мочка</MenuItem>
+        <MenuItem value="Прилягаюча мочка">Прилягаюча мочка</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="lips-select">Губи</InputLabel>
+      <Select labelId="lips-select" name="lips" value={values.lips} onChange={handleChange}>
+        <MenuItem value="Сердечком">Сердечком</MenuItem>
+        <MenuItem value="Пухкі">Пухкі</MenuItem>
+        <MenuItem value="Вузькі">Вузькі</MenuItem>
+        <MenuItem value="Асиметричні">Асиметричні</MenuItem>
+        <MenuItem value="З припущеними кутиками">З припущеними кутиками</MenuItem>
+        <MenuItem value="З піднятими кутиками">З піднятими кутиками</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControl>
+      <InputLabel id="chin-select">Підборіддя</InputLabel>
+      <Select labelId="chin-select" name="chin" value={values.chin} onChange={handleChange}>
+        <MenuItem value="Овальне">Овальне</MenuItem>
+        <MenuItem value="Гостре">Гостре</MenuItem>
+        <MenuItem value="Скошене">Скошене</MenuItem>
+        <MenuItem value="Квадратне">Квадратне</MenuItem>
+        <MenuItem value="Виступаюче">Виступаюче</MenuItem>
+      </Select>
+    </FormControl>
+
+    <FormControlLabel
+      control={<Checkbox name="hasMustache" checked={values.hasMustache} onChange={handleChange}
+      />}
+      label="Наявність вус"/>
+
+    <FormControlLabel
+      control={<Checkbox name="hasMustache" checked={values.hasBeard} onChange={handleChange}
+      />}
+      label="Наявність бороди"/>
+
+    <FormControl style={{ margin: '0 0 16px 0' }}>
+      <InputLabel id="skills-select">Навички та вміння</InputLabel>
+      <Select labelId="skills-select" name="skills" value={values.skills} onChange={handleChange}>
+        <MenuItem value="Вокал">Вокал</MenuItem>
+        <MenuItem value="Музичні інструменти">Музичні інструменти</MenuItem>
+        <MenuItem value="Хореографія">Хореографія</MenuItem>
+        <MenuItem value="Водіння авто">Водіння авто</MenuItem>
+        <MenuItem value="Сценічний бій">Сценічний бій</MenuItem>
+        <MenuItem value="Володіння зброєю">Володіння зброєю</MenuItem>
+        <MenuItem value="Знання іноземних мов">Знання іноземних мов</MenuItem>
+      </Select>
     </FormControl>
 
     <Button type="submit" variant="contained" color="primary">

@@ -14,6 +14,7 @@ const useClasses = makeStyles({
     padding: 32
   },
   imageBox: {
+    maxWidth: 600,
     flexGrow: 1,
     '& img': {
       width: '100%',
