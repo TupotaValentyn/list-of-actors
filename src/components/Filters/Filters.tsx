@@ -383,7 +383,7 @@ const Filters: FC<Props> = () => {
       label="Наявність вус"/>
 
     <FormControlLabel
-      control={<Checkbox name="hasMustache" checked={values.hasBeard} onChange={handleChange}
+      control={<Checkbox name="hasBeard" checked={values.hasBeard} onChange={handleChange}
       />}
       label="Наявність бороди"/>
 
