@@ -258,7 +258,7 @@ const Filters: FC<Props> = () => {
 
     <FormControl>
       <InputLabel id="hairColor-select">Колір волосся</InputLabel>
-      <Select labelId="sex-select" name="hairColor" value={values.hairColor} onChange={handleChange}>
+      <Select labelId="hairColor-select" name="hairColor" value={values.hairColor} onChange={handleChange}>
         <MenuItem value="Русявий">Русявий</MenuItem>
         <MenuItem value="Блонд">Блонд</MenuItem>
         <MenuItem value="Чорний">Чорний</MenuItem>
@@ -269,7 +269,7 @@ const Filters: FC<Props> = () => {
 
     <FormControl>
       <InputLabel id="hairLength-select">Довжина волосся</InputLabel>
-      <Select labelId="hairLength-select" name="hairColor" value={values.hairLength} onChange={handleChange}>
+      <Select labelId="hairLength-select" name="hairLength" value={values.hairLength} onChange={handleChange}>
         <MenuItem value="Коротке">Коротке</MenuItem>
         <MenuItem value="Середня довжина">Середня довжина</MenuItem>
         <MenuItem value="Чорний">Довге</MenuItem>
