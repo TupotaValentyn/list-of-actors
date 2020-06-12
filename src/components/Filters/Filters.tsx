@@ -264,6 +264,10 @@ const Filters: FC<Props> = () => {
         <MenuItem value="Чорний">Чорний</MenuItem>
         <MenuItem value="Рудий">Рудий</MenuItem>
         <MenuItem value="Каштановий">Каштановий</MenuItem>
+        <MenuItem value="Світло-каштановий">Світло-каштановий</MenuItem>
+        <MenuItem value="Темно-каштановий">Темно-каштановий</MenuItem>
+        <MenuItem value="Сивий">Сивий</MenuItem>
+        <MenuItem value="Неповторний">Неповторний</MenuItem>
       </Select>
     </FormControl>
 
@@ -332,6 +336,7 @@ const Filters: FC<Props> = () => {
         <MenuItem value="Довгий ніс">Довгий ніс</MenuItem>
         <MenuItem value="Ніс картоплею">Ніс картоплею</MenuItem>
         <MenuItem value="Ніс з горбинкою">Ніс з горбинкою</MenuItem>
+        <MenuItem value="Короткий ніс">Короткий ніс</MenuItem>ss
         <MenuItem value="Ніс з горбинкою">Ніс з горбинкою</MenuItem>
         <MenuItem value="Орлиний ніс">Орлиний ніс</MenuItem>
       </Select>
