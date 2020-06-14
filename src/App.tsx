@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   Switch,
-  Route
+  Route, Link
 } from 'react-router-dom';
 import './App.css';
 import { routes } from './components/configs/routes';
-import { AppBar, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Dialog, IconButton, Toolbar, Typography } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Filters from './components/Filters';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,6 +18,7 @@ function App() {
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     // dispatch(actorsDataSuccess())
@@ -37,6 +38,14 @@ function App() {
     setOpen(open);
   };
 
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClickClose = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <div className="App">
       <AppBar position="sticky">
@@ -49,6 +58,9 @@ function App() {
               Actor’s Base
             </Typography>
           </div>
+          <Button variant="contained" color="secondary" onClick={handleClickOpen} style={{ margin: '0 16px' }}>
+            Замовити актора
+          </Button>
           <IconButton edge="start" color="inherit" aria-label="menu"
                       onClick={toggleDrawer(true)}
                       onKeyDown={toggleDrawer(true)}>
@@ -61,6 +73,17 @@ function App() {
           </div>
         </Drawer>
       </AppBar>
+      <Dialog onClose={handleClickClose} aria-labelledby="simple-dialog-title" open={openDialog}>
+        <div style={{ padding: 32, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Typography variant="body2">
+            Телефон: +380 63 119 9945
+          </Typography>
+          <a href="tel:+380 63 119 9945" style={{ textDecoration: 'none', color: 'black' }}>
+            Зателефонувати
+          </a>
+
+        </div>
+      </Dialog>
       <BrowserRouter>
         <Switch>
           {routes.map((route) => {
