@@ -14,6 +14,7 @@ const useClasses = makeStyles({
     padding: 32
   },
   imageBox: {
+    margin: '32px 0 0',
     maxWidth: 600,
     flexGrow: 1,
     '& img': {
@@ -71,19 +72,17 @@ const ActorPage: FC<Props> = () => {
 
       <div className={imageBox}>
         <img src={src} alt=""/>
-        <Typography variant="h5" color="primary">
-          {`${lastName} ${firstName}`}
-        </Typography>
-        <div style={{width: '100%'}}>
-          <iframe style={{width: '100%'}} height="315" src={videoLink} frameBorder="0"
+
+        <div style={{ width: '100%' }}>
+          <iframe style={{ width: '100%' }} height="315" src={videoLink} frameBorder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen></iframe>
         </div>
       </div>
       <div className={contentBox}>
         <div>
-          <Typography variant="h3" color="primary">
-            Інформація про актора
+          <Typography variant="h5" color="primary">
+            {`${lastName} ${firstName}`}
           </Typography>
           <div style={{ padding: '0 32px', width: 600 }}>
             <div className={fieldWrapper}>
@@ -329,39 +328,7 @@ const ActorPage: FC<Props> = () => {
             <div className={fieldWrapper}>
               <InputLabel shrink>
                 <Typography color="primary">
-                  Наявність пірсингу
-                </Typography>
-              </InputLabel>
-              <TextField
-                disabled
-                defaultValue={hasPiercing}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-                  classes: { input: cursorPointer }
-                }}
-              />
-            </div>
-            <div className={fieldWrapper}>
-              <InputLabel shrink>
-                <Typography color="primary">
-                  Наявність тату
-                </Typography>
-              </InputLabel>
-              <TextField
-                disabled
-                defaultValue={hasTattoo}
-                fullWidth
-                InputProps={{
-                  readOnly: true,
-                  classes: { input: cursorPointer }
-                }}
-              />
-            </div>
-            <div className={fieldWrapper}>
-              <InputLabel shrink>
-                <Typography color="primary">
-                  Висота
+                  Зріст
                 </Typography>
               </InputLabel>
               <TextField

@@ -41,8 +41,8 @@ const ActorCard: FC<Props> = ({ firstName, lastName, description, src, id }) => 
         </Typography>
         {description}
       </CardContent>
-      <CardActions>
-        <NavLink to={`/actor/${id}`}>View</NavLink>
+      <CardActions style={{justifyContent: 'flex-end'}}>
+        <NavLink style={{textDecoration: 'none', color: 'black'}} to={`/actor/${id}`}>Перегляд</NavLink>
       </CardActions>
     </Card>
   );

@@ -41,9 +41,14 @@ function App() {
     <div className="App">
       <AppBar position="sticky">
         <Toolbar>
-          <Typography>
-            Actors
-          </Typography>
+          <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+            <div>
+              <img style={{ width: 70, height: 70, margin: '0 16px 0 0' }} src="/logo.PNG" alt=""/>
+            </div>
+            <Typography>
+              Actor’s Base
+            </Typography>
+          </div>
           <IconButton edge="start" color="inherit" aria-label="menu"
                       onClick={toggleDrawer(true)}
                       onKeyDown={toggleDrawer(true)}>

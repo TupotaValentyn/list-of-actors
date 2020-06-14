@@ -7,43 +7,54 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Slider,
+  Slider, TextField,
   Typography
 } from '@material-ui/core';
 import * as Yup from 'yup';
 import { actors } from '../../data/data';
 import { actorsDataSuccess } from '../../slices/actors';
 import { useDispatch } from 'react-redux';
+import { Autocomplete } from '@material-ui/lab';
 
 
 type Props = {};
 
 const initialValues = {
   age: [3, 100],
-  sex: 'Чоловік',
-  city: 'Київ',
+  sex: '',
+  city: '',
   readyToRelocate: false,
-  bodyConstitution: 'Ектоморф',
+  bodyConstitution: '',
   height: [60, 200],
   weight: [30, 150],
   chest: [40, 150],
   waist: [40, 140],
   hips: [40, 150],
-  country: 'Україна',
-  hairColor: 'Русявий',
-  hairLength: 'Коротке',
-  faceShape: 'Овальне',
-  forehead: 'Високий і широкий',
-  eyeShape: 'Нависла повіка',
-  eyeColor: 'Світло-карий',
-  noseType: 'Довгий ніс',
-  ears: 'Круглі',
-  lips: 'Сердечком',
-  chin: 'Овальне',
+  country: '',
+  hairColor: '',
+  hairLength: '',
+  faceShape: '',
+  forehead: '',
+  eyeShape: '',
+  eyeColor: '',
+  noseType: '',
+  ears: '',
+  lips: '',
+  chin: '',
   hasMustache: false,
   hasBeard: false,
-  skills: 'Вокал'
+  skills: []
 };
+
+const initialSkills = [
+  { value: 'Вокал' },
+  { value: 'Музичні інструменти' },
+  { value: 'Хореографія' },
+  { value: 'Водіння авто' },
+  { value: 'Сценічний бій' },
+  { value: 'Володіння зброєю' },
+  { value: 'Знання іноземних мов' }
+]
 
 const Filters: FC<Props> = () => {
   function valuetext(value: number) {
@@ -71,6 +82,17 @@ const Filters: FC<Props> = () => {
     return actorSkills.find((actorSkill) => actorSkill === skill);
   }
 
+  const matchAutocomplete = (actorSkills: any[], skills: string[]) => {
+    const result = actorSkills.map((actorSkill: any) => {
+      return skills.find((skill: string) => {
+        console.log(skill);
+        return actorSkill.value === skill
+      });
+    }).filter(Boolean);
+
+    return result.length === actorSkills.length;
+  }
+
   const onSubmit = (val: any) => {
     console.log(val);
 
@@ -81,8 +103,9 @@ const Filters: FC<Props> = () => {
         skills, waist, weight
       } = actor;
 
+      matchAutocomplete(val.skills, skills);
       return valueBetween(val.age, age) && val.sex === sex && val.city === city &&
-        val.readyToRelocate === readyToRelocate && val.bodyConstitution === bodyConstitution &&
+        convertBoolValue(val.readyToRelocate, readyToRelocate) && val.bodyConstitution === bodyConstitution &&
         valueBetween(val.height, height) && valueBetween(val.weight, weight) &&
         valueBetween(val.chest, chest) &&
         valueBetween(val.waist, waist) && valueBetween(val.hips, hips) &&
@@ -90,7 +113,7 @@ const Filters: FC<Props> = () => {
         faceShape === val.faceShape && forehead === val.forehead && eyeShape === val.eyeShape &&
         eyeColor === val.eyeColor && noseType === val.noseType && ears === val.ears &&
         lips === val.lips && chin === val.chin && convertBoolValue(val.hasMustache, hasMustache) &&
-        convertBoolValue(val.hasBeard, hasBeard) && findMatches(skills, val.skills)
+        convertBoolValue(val.hasBeard, hasBeard) && matchAutocomplete(val.skills, skills)
     })
 
     dispatch(actorsDataSuccess(matchActors));
@@ -102,6 +125,10 @@ const Filters: FC<Props> = () => {
     validationSchema: Yup.object().shape({}),
     onSubmit
   })
+
+  const handleAutocomplete = (val: any, newSkills: any) => {
+    setFieldValue('skills', newSkills);
+  }
 
   const handleSliderChange = (name: any) => (event: any, value: any) => {
     setFieldValue(name, value);
@@ -131,6 +158,16 @@ const Filters: FC<Props> = () => {
         <MenuItem value="Жінка">Жінка</MenuItem>
       </Select>
     </FormControl>
+
+    <FormControl>
+      <InputLabel id="country-select">
+        Країна
+      </InputLabel>
+      <Select labelId="country-select" name="country" value={values.country} onChange={handleChange}>
+        <MenuItem value="Україна">Україна</MenuItem>
+        <MenuItem value="Росія">Росія</MenuItem>
+      </Select>
+    </FormControl>
     <FormControl>
       <InputLabel id="city-select">
         Місто
@@ -141,15 +178,6 @@ const Filters: FC<Props> = () => {
         <MenuItem value="Одеса">Одеса</MenuItem>
         <MenuItem value="Харків">Харків</MenuItem>
         <MenuItem value="Черкаси">Черкаси</MenuItem>
-      </Select>
-    </FormControl>
-    <FormControl>
-      <InputLabel id="country-select">
-        Країна
-      </InputLabel>
-      <Select labelId="country-select" name="country" value={values.country} onChange={handleChange}>
-        <MenuItem value="Україна">Україна</MenuItem>
-        <MenuItem value="Росія">Росія</MenuItem>
       </Select>
     </FormControl>
     <FormControlLabel
@@ -169,7 +197,7 @@ const Filters: FC<Props> = () => {
     <FormControl>
       <Typography id="range-slider" color="textSecondary" gutterBottom variant="caption"
                   style={{ textAlign: 'left' }}>
-        Вік
+        Зріст
       </Typography>
       <Slider
         name="height"
@@ -311,6 +339,7 @@ const Filters: FC<Props> = () => {
         <MenuItem value="Нависла повіка">Нависла повіка</MenuItem>
         <MenuItem value="Мигдалеподібні">Мигдалеподібні</MenuItem>
         <MenuItem value="Близько посаджені очі">Близько посаджені очі</MenuItem>
+        <MenuItem value="Глибоко посаджені очі">Глибоко посаджені очі</MenuItem>
         <MenuItem value="З опущеними кутиками">З опущеними кутиками</MenuItem>
         <MenuItem value="Розкосі">Розкосі</MenuItem>
         <MenuItem value="Одне око">Одне око</MenuItem>
@@ -387,18 +416,23 @@ const Filters: FC<Props> = () => {
       />}
       label="Наявність бороди"/>
 
-    <FormControl style={{ margin: '0 0 16px 0' }}>
-      <InputLabel id="skills-select">Навички та вміння</InputLabel>
-      <Select labelId="skills-select" name="skills" value={values.skills} onChange={handleChange}>
-        <MenuItem value="Вокал">Вокал</MenuItem>
-        <MenuItem value="Музичні інструменти">Музичні інструменти</MenuItem>
-        <MenuItem value="Хореографія">Хореографія</MenuItem>
-        <MenuItem value="Водіння авто">Водіння авто</MenuItem>
-        <MenuItem value="Сценічний бій">Сценічний бій</MenuItem>
-        <MenuItem value="Володіння зброєю">Володіння зброєю</MenuItem>
-        <MenuItem value="Знання іноземних мов">Знання іноземних мов</MenuItem>
-      </Select>
-    </FormControl>
+
+    <Autocomplete
+      style={{ margin: '0 0 16px 0' }}
+      multiple
+      id="tags-standard"
+      options={initialSkills}
+      getOptionLabel={(option) => option.value}
+      onChange={handleAutocomplete}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="standard"
+          label="Навички та вміння"
+          placeholder="Навички та вміння"
+        />
+      )}
+    />
 
     <Button type="submit" variant="contained" color="primary">
       Підібрати актора

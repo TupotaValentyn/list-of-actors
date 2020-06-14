@@ -9,6 +9,7 @@ type Props = {};
 
 const useClasses = makeStyles({
   root: {
+    justifyContent: 'center',
     height: '100%',
     padding: 32,
     display: 'grid',
@@ -30,7 +31,7 @@ const Overview: FC<Props> = () => {
         {
           actors.payload?.length ? actors.payload?.map((actor: any) => {
             return <ActorCard {...actor}/>
-          }) : <Typography>No data</Typography>
+          }) : <Typography color="primary" variant="h5">Вибачте, за Вашим запитом нічого не знайдено :(</Typography>
         }
       </div>
     </>
